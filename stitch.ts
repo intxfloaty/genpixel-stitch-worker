@@ -96,7 +96,7 @@ async function runFfmpeg({
     }
   }
 
-  args.push('-c:v', 'libx264', '-preset', 'fast', '-crf', '23', '-an', '-y', outputPath)
+  args.push('-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23', '-threads', '2', '-x264-params', 'rc-lookahead=10', '-an', '-y', outputPath)
 
   const { stderr } = await execFileAsync('ffmpeg', args)
   if (stderr) console.log('[ffmpeg]', stderr)
