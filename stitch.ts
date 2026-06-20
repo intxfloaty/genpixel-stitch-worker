@@ -149,13 +149,13 @@ export async function stitchVideo(generationId: string): Promise<void> {
     const storagePath = `finals/${generationId}.mp4`
 
     const { error: uploadErr } = await supabase.storage
-      .from('transformations')
+      .from('finals')
       .upload(storagePath, outputBuffer, { contentType: 'video/mp4', upsert: true })
 
     if (uploadErr) throw new Error(`Upload failed: ${uploadErr.message}`)
 
     const { data: { publicUrl } } = supabase.storage
-      .from('transformations')
+      .from('finals')
       .getPublicUrl(storagePath)
 
     // 6. Mark complete
